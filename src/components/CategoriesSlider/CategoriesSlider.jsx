@@ -26,7 +26,7 @@ var settings = {
 
   return <>
 
-      <Slider className='mb-10 mt-25' {...settings}>
+      <Slider className='mb-10 mt-10' {...settings}>
       {categories.map((category) => 
        <div>  <img src={category.image} className='w-100 h-[200px] object-cover' alt={category.name} />   </div>
          

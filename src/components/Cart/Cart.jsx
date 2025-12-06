@@ -47,10 +47,10 @@ async function updateProduct(id,count) {
  }
   return <>
 
-<div className='text-center'>
-       <h2>total price : {totalPrice}</h2>
-      <h2>number: {numOfCart}</h2>
-<button onClick={()=>{deleteCart()}} type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Clear Cart</button>
+<div className='text-center relative mb-10'>
+       <h2 className='font-mono text-2xl'>Total price : {totalPrice} EGP</h2>
+      <h2 className='font-mono text-2xl'>Number Of Items : {numOfCart}</h2>
+<button onClick={()=>{deleteCart()}} type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 right-5 top-5 absolute ">Clear Cart</button>
 </div>
 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table className="w-full text-sm text-left rtl:text-right text-black">
@@ -121,7 +121,7 @@ async function updateProduct(id,count) {
   </table>
 
 </div>
-  <Link to={"/payment"} type="button" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Checkout</Link>
+ <div className='mt-10'><Link to={"/payment"} type="button" class= "text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 ">Checkout</Link></div>
 
 
 

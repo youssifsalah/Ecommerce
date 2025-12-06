@@ -73,13 +73,19 @@ allProducts = allProducts.filter(prod =>
           />
         </div>
       ) : (
-        <div className='parent grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4'>
+        <div className='parent grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 '>
           {products?.map((product) => (
-            <div className='group overflow-hidden relative cursor-pointer shadow-xl p-2' key={product._id}>
+            <div className='group overflow-hidden relative cursor-pointer shadow-2xl p-2 px-3 rounded-3xl' key={product._id}>
               <Link to={`/ProductDetails/${product._id}/${product.category}`}>
                 <img src={product.imageCover} alt={product.title}/>
-                <h3>{product.category.name}</h3>
-                <h2>{product.title.split(" ", 2).join(" ")}</h2>
+                
+                <h2 className='text-mono text-black font-bold'>{product.title.split(" ", 2).join(" ")}</h2>
+      <p>
+  {product.description.length > 60
+    ? product.description.slice(0, 60) + "..."
+    : product.description}
+</p>
+
                 <div className='flex justify-between'>
                   {product.priceAfterDiscount ? (
                     <>
@@ -92,30 +98,29 @@ allProducts = allProducts.filter(prod =>
                   <span><i className='fas fa-star text-yellow-400'></i>{product.ratingsAverage}</span>
                 </div>
                 {product.priceAfterDiscount ? (
-                  <span className="bg-red-100 text-red-800  mb-10 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">
+                  <span className="mb-10 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-700 dark:text-white">
                     Sale
                   </span>
                 ) : null}
               </Link>
-<div >
-                <button
-                onClick={()=>{addToCartProduct(product._id)}}
-                type="button"
-                className="group-hover:translate-y-0 translate-y-[260%] transition-all duration-500 text-white 
-                bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br 
-                focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 
-                shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 
-                font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              >
-                Add To Cart
-              </button> 
-              <button 
-              onClick={()=>{addToWishlistProduct(product._id)}}
+<div >         
+
+  <button type="button"   onClick={()=>{addToCartProduct(product._id)}}
+ class="inline-flex items-center btn me-10 bg-black rounded-3xl text-white bg-brand hover:bg-gray-800 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+<svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+</svg>
+Add To Cart
+</button>
+                <button 
+               onClick={()=>{addToWishlistProduct(product._id)}}
               type="button"
-                className="cursor-pointer group-hover:translate-y-0 translate-y-[270%] transition-all  duration-500
+                className="cursor-pointer 
                 text-gray-900
-                hover:text-red-800 text-4xl"
-              ><i class="fa-solid fa-heart"></i></button>
+                hover:text-red-800 text-3xl"
+              ><i class="fa-regular fa-heart"></i></button>
+
+            
 </div>
             </div>
           ))}

@@ -4,6 +4,8 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as YUP from "yup" ;
+import logo from "../../assets/YS.png"
+
 import { authContext } from '../../Context/AuthContextProvider';export default function Login() {
 let {setToken} = useContext(authContext)
   let navigate = useNavigate();
@@ -58,8 +60,10 @@ let validationSchema = YUP.object().shape({
         </div>
       ) : null}
 
-      <form onSubmit={LoginForm.handleSubmit} className='w-6/7 px-15 mx-auto'>
-        <h2 className='my-5 mt-25 text-[25px]'>Login</h2>
+   <div className='bg-gray-100 w-120 mx-auto rounded-2xl'>
+    <img src={logo} alt='logo' className='w-20 mx-auto mb-2 pt-5'></img>
+         <form onSubmit={LoginForm.handleSubmit} className='w-6/7 px-15 mx-auto'>
+        <h2 className='my-5 font-serif text-[25px]'>Login</h2>
 
 
     
@@ -103,11 +107,15 @@ let validationSchema = YUP.object().shape({
 
         <button disabled = {isLoading?true:false} 
            type="submit" 
-          className="focus:outline-none mt-7 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+          className="focus:outline-none mt-7 text-white bg-black hover:bg-gray-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-12"
         >
           {isLoading ? <i className='fas fa-spin fa-spinner'></i> : "Login" }
         </button>
       </form>
+   </div>
+
+
+      
     </>
   );
 }

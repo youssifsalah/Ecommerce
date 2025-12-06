@@ -10,6 +10,9 @@ export  function Home() {
 
   return <>
   <CategoriesSlider/>
+<h1>Welcome to YS Mart ! </h1>
+<p className="mb-5">Explore All Products Now </p>
+
 <DisplayProducts/>
 
 

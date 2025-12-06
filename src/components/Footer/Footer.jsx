@@ -11,7 +11,7 @@ export default function Footer() {
         
         {/* Logo & About */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-4">Fresh Mart</h2>
+          <h2 className="text-2xl font-bold text-white mb-4">YS Mart</h2>
           <p className="text-sm leading-6">
             Your trusted online store for fresh products, daily essentials, and more. 
             We deliver quality at the best prices, straight to your door.
@@ -66,7 +66,7 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="bg-gray-800 py-4 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} Fresh Mart. All rights reserved.
+        © {new Date().getFullYear()} YS Mart. All rights reserved.
       </div>
     </footer>
   );

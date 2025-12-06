@@ -4,6 +4,7 @@ import { WishlistContext } from '../../Context/WishlistContextProvider'
 import toast, { Toaster } from 'react-hot-toast'
 import { ColorRing } from 'react-loader-spinner'
 import { cartContext } from '../../Context/CartContextProvider'
+import { Link } from 'react-router-dom'
 export default function WishList() {
   let {addToCart} = useContext(cartContext)
   
@@ -73,94 +74,67 @@ export default function WishList() {
  }
   return <>
       
-
+        <h1>Wishlist </h1>
      <div className='text-center'>
    
-      <h1 className='text-4xl font-serif mb-10 mt-25'>Number: {numOfWishlist}</h1> 
+      <h1 className='text-4xl font-serif mb-10 '>Number Of Items : {numOfWishlist}</h1> 
 </div>
 
 
-<div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-  <table className="w-full text-sm text-left rtl:text-right text-black">
-    <thead className="text-xs text-black uppercase bg-gray-50">
-      <tr>
-        <th scope="col" className="px-16 py-3">
-          <span className="sr-only">Image</span>
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Product
-        </th>
-                <th scope="col" className="px-6 py-3">
-          Category
-        </th>
-                <th scope="col" className="px-6 py-3">
-          Brand
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Price
-        </th>
-        <th scope="col" className="px-6 py-3">
-          Action
-        </th>
-                <th scope="col" className="px-6 py-3">
-          Action
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-{      products.map((product)=> <tr key={product._id} className="bg-white border-b border-gray-200 hover:bg-gray-200 text-black">
-        <td className="p-4">
-          <img src={product.imageCover} className="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch" />
-        </td>
-        <td className="px-6 py-4 font-semibold text-black">
-          {product.title}
-        </td>
-          <td className="px-6 py-4 font-semibold text-black">
-         {product.category?.name}
-        </td>
-          <td className="px-6 py-4 font-semibold text-black">
-         {product.brand?.name}
-        </td>
-      
-        <td className="px-6 py-4 font-semibold text-gray-900">
-      {product.price} EGP
-        </td>
-        <td className="px-6 py-4">
-           <button
-                onClick={()=>{addToCartProduct(product._id)}}
-                type="button"
-                className=" transition-all duration-500 text-white 
-                bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br 
-                focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 
-                shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 
-                font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-              >
-                Add To Cart
-              </button> 
-
-        </td>
-                <td className="px-6 py-4">
-   <button 
-              onClick={()=>{RemoveToWishlistProduct(product._id)}}
-              type="button"
-                className="cursor-pointer transition-all  duration-500
-                text-red-700
-                hover:text-gray-900 text-4xl"
-              ><i class="fa-solid fa-heart"></i></button>
-        </td>
-      </tr>)}
+                <div className='parent grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 '>
+                  {products?.map((product) => (
+                    <div className='group overflow-hidden relative cursor-pointer shadow-2xl p-2 px-3 rounded-3xl' key={product._id}>
+                      <Link to={`/ProductDetails/${product._id}/${product.category}`}>
+                        <img src={product.imageCover} alt={product.title}/>
+                        
+                        <h2 className='text-mono text-black font-bold'>{product.title.split(" ", 2).join(" ")}</h2>
+              <p>
+          {product.description.length > 50
+            ? product.description.slice(0, 50) + "..."
+            : product.description}
+        </p>
+        
+                        <div className='flex justify-between'>
+                          {product.priceAfterDiscount ? (
+                            <>
+                              <h3 className='text-red-500 line-through'>{product.price} EGP</h3>
+                              <h3>{product.priceAfterDiscount} EGP</h3>
+                            </>
+                          ) : (
+                            <h3>{product.price} EGP</h3>
+                          )}
+                          <span><i className='fas fa-star text-yellow-400'></i>{product.ratingsAverage}</span>
+                        </div>
+                        {product.priceAfterDiscount ? (
+                          <span className="mb-10 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-700 dark:text-white">
+                            Sale
+                          </span>
+                        ) : null}
+                      </Link>
+        <div >         
+        
+          <button type="button"   onClick={()=>{addToCartProduct(product._id)}}
+         class="inline-flex items-center btn me-10 bg-black rounded-3xl text-white bg-brand hover:bg-gray-800 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+        <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+        </svg>
+        Add To Cart
+        </button>
+                        <button 
+                        onClick={()=>{RemoveToWishlistProduct(product._id)}}
+                      type="button"
+                        className="cursor-pointer 
+                        text-red-600
+                        hover:text-black text-3xl"
+                      ><i class="fa-solid fa-heart"></i></button>
+        
+                    
+        </div>
+                    </div>
+                  ))}
+                </div> 
 
 
-     
-
-    </tbody>
-  </table>
-
-</div>
-
-
-  
-  
   </>
  
 
