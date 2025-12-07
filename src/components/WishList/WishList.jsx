@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import { ColorRing } from 'react-loader-spinner'
 import { cartContext } from '../../Context/CartContextProvider'
 import { Link } from 'react-router-dom'
+
 export default function WishList() {
   let {addToCart} = useContext(cartContext)
   
@@ -81,7 +82,7 @@ export default function WishList() {
 </div>
 
 
-                <div className='parent grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 '>
+<div className="grid  sm:grid-cols-2 sm:mx-auto  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {products?.map((product) => (
                     <div className='group overflow-hidden relative cursor-pointer shadow-2xl p-2 px-3 rounded-3xl' key={product._id}>
                       <Link to={`/ProductDetails/${product._id}/${product.category}`}>

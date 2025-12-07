@@ -20,69 +20,81 @@ navigate("/Login")
   return <>
 
 
-<nav className="bg-gray-200 fixed w-full top-0 z-50 shadow px-10">
-  <div className="container mx-auto flex items-center justify-between p-1">
-    {/* Logo + Button */}
-    <div className="flex items-center gap-6">
-      <Link to="/">
-        <div className='d-flex flex'><img src={logo} alt="logo" className="h-11"  /><span className={Style["logo-name"]} > YS Mart</span></div>
-      </Link>
+<nav className="bg-gray-200 fixed w-full top-0 z-50 shadow px-4">
+      <div className="container mx-auto flex items-center justify-between p-2">
+        {/* Left: Hamburger (mobile) + Logo */}
+        <div className="flex items-center gap-4">
+          {/* Hamburger only <425px */}
+          <button
+            onClick={() => setOpen(!open)}
+            className="sm:hidden text-2xl"
+          >
+            ☰
+          </button>
 
-      <button
-        className="lg:hidden text-2xl"
-        onClick={() => setOpen(!open)}
-      >
-        ☰
-      </button>
-    </div>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logo} alt="logo" className="h-10 " />
+            <span className="font-bold text-lg ">YS Mart</span>
+          </Link>
+        </div>
 
-    {/* Menu Links */}
-    <div
-      className={`flex-col lg:flex-row lg:flex items-center w-full lg:w-auto gap-4 mt-4 lg:mt-0 ${
-        open ? "flex" : "hidden"
-      }`}
-    >
-      {token ? (
-        <ul className="flex flex-col lg:flex-row gap-4 items-center pe-30 2xl:pe-75 text-gray-800 font-serif text-l  ">
-          <li className=' hover:text-black'><Link to="/">Home</Link></li>
-          <li className=' hover:text-black'><Link to="/products">Products</Link></li>
-          
-          <li className=' hover:text-black'><Link to="/brands">Brands</Link></li>
-          <li className=' hover:text-black'><Link to="/categories">Categories</Link></li>
-
-          <li className=' hover:text-black'><Link to="/Allorders">My Orders</Link></li>
-        </ul>
-      ) : null}
-
-      {/* Social + Auth Links */}
-      <ul className="flex flex-col lg:flex-row items-center gap-4 lg:ms-auto mt-4 lg:mt-0">
-        
-        {token ? (
-            <>
+        {/* Center: Links (tablet & desktop) */}
+        {token && (
+          <ul className="hidden sm:flex flex-col sm:flex-row gap-6 items-center">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/products">Products</Link></li>
+            <li><Link to="/brands">Brands</Link></li>
+            <li><Link to="/categories">Categories</Link></li>
+            <li><Link to="/Allorders">My Orders</Link></li>
+            {/* Logout only in tablet/desktop */}
             
-            <li className='hover:text-black text-xl mx-5'><Link to="/wishlist"><i class="fa-solid fa-heart"></i></Link></li>
-            <li className='hover:text-black text-xl'><Link to="/cart"><i class="fa-solid fa-bag-shopping"></i></Link></li>
-           <li>
-  <button
-    onClick={logout}
-    className="bg-black text-white font-serif ms-10 px-3 py-2 rounded-3xl hover:bg-gray-800 transition-colors "
-  >
-    Logout
-  </button>
-</li>
-
-            
-            </>
-        ) : (
-          <>
-            <li ><Link to="/login">Login</Link></li>
-            <li ><Link to="/register">Register</Link></li>
-          </>
+          </ul>
         )}
-      </ul>
-    </div>
-  </div>
-</nav>
+
+        {/* Right: Wishlist & Cart always visible */}
+        {token && (
+          <div className="flex items-center gap-4">
+            <Link to="/wishlist" className="text-xl hover:text-red-600">
+              <i className="fa-solid fa-heart"></i>
+            </Link>
+            <Link to="/cart" className="text-xl hover:text-gray-800">
+              <i className="fa-solid fa-bag-shopping"></i>
+            </Link>
+
+            <li>
+              <button 
+                onClick={logout}
+                className="bg-black text-white px-3 py-1 rounded-2xl hover:bg-gray-800 transition-colors hidden sm:flex flex-col sm:flex-row gap-6 items-center"
+              >
+                Logout
+              </button>
+            </li>
+          </div>
+        )}
+      </div>
+
+      {/* Mobile Menu: <425px */}
+      {open && (
+        <div className="sm:hidden bg-gray-100 w-full shadow-lg absolute top-full left-0">
+          <ul className="flex flex-col gap-2 p-4">
+            <li><Link to="/" onClick={() => setOpen(false)}>Home</Link></li>
+            <li><Link to="/products" onClick={() => setOpen(false)}>Products</Link></li>
+            <li><Link to="/brands" onClick={() => setOpen(false)}>Brands</Link></li>
+            <li><Link to="/categories" onClick={() => setOpen(false)}>Categories</Link></li>
+            <li><Link to="/Allorders" onClick={() => setOpen(false)}>My Orders</Link></li>
+            <li>
+              <button
+                onClick={() => { logout(); setOpen(false); }}
+                className="bg-black text-white px-3 py-1 rounded-2xl w-full hover:bg-gray-800"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
+    </nav>
 <nav className="navbar p-0 mt-12">
   <div className={Style["ticker-container"]}>
     <div className={Style["ticker-move"]}>
