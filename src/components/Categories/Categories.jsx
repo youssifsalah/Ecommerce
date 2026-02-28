@@ -34,7 +34,7 @@ getCategories()
   
 
  
- <div className="grid grid-cols-1 min-[425px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mt-8 gap-6">
+ <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mt-8 gap-6">
     {categories.map((category)=>
    <div key={category._id}>
        <Link to={`/SubCategories/${category._id}`}>

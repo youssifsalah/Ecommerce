@@ -8,9 +8,10 @@ import { WishlistContext } from "../../Context/WishlistContextProvider"
 
 export function DisplayProducts() {
   const { addToCart } = useContext(cartContext)
-  const { addToWishlist } = useContext(WishlistContext)
+  const { getWishlist, toggleWishlist, isInWishlist } = useContext(WishlistContext)
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState(null)
+  const [hoveredHeartId, setHoveredHeartId] = useState(null)
   const { subcategoryId } = useParams()
 
   async function getProducts() {
@@ -28,10 +29,14 @@ export function DisplayProducts() {
     setIsLoading(false)
   }
 
-  async function addToWishlistProduct(id) {
-    const flag = await addToWishlist(id)
-    if (flag) toast.success("Item Added successfully")
-    else toast.error("Failed to add")
+  async function toggleWishlistProduct(id) {
+    const wasInWishlist = isInWishlist(id)
+    const flag = await toggleWishlist(id)
+    if (flag) {
+      toast.success(wasInWishlist ? "Item removed from wishlist" : "Item Added successfully")
+    } else {
+      toast.error("Failed to update wishlist")
+    }
   }
 
   async function addToCartProduct(id) {
@@ -43,6 +48,10 @@ export function DisplayProducts() {
   useEffect(() => {
     getProducts()
   }, [subcategoryId])
+
+  useEffect(() => {
+    getWishlist()
+  }, [])
 
   return (
     <>
@@ -115,11 +124,21 @@ export function DisplayProducts() {
                   Add To Cart
                 </button>
                 <button
-                  onClick={() => addToWishlistProduct(product._id)}
+                  onMouseEnter={() => setHoveredHeartId(product._id)}
+                  onMouseLeave={() => setHoveredHeartId(null)}
+                  onClick={() => toggleWishlistProduct(product._id)}
                   type="button"
-                  className="cursor-pointer text-gray-900 hover:text-red-800 text-3xl leading-none"
+                  className={`cursor-pointer text-3xl leading-none transition-colors ${
+                    isInWishlist(product._id) ? "text-red-600" : "text-gray-900 hover:text-red-600"
+                  }`}
                 >
-                  <i className="fa-regular fa-heart"></i>
+                  <i
+                    className={`${
+                      isInWishlist(product._id) || hoveredHeartId === product._id
+                        ? "fa-solid"
+                        : "fa-regular"
+                    } fa-heart`}
+                  ></i>
                 </button>
               </div>
             </div>

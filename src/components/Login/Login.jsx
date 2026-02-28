@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Style from "./Login.module.css";
 import { useFormik } from 'formik';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as YUP from "yup" ;
 import logo from "../../assets/YS.png"
 
@@ -115,6 +115,12 @@ let validationSchema = YUP.object().shape({
         >
           {isLoading ? <i className='fas fa-spin fa-spinner'></i> : "Login" }
         </button>
+        <p className="text-sm text-gray-700 pb-6">
+          Don't have an account?{" "}
+          <Link to="/register" className="font-bold text-black underline">
+            Register
+          </Link>
+        </p>
       </form>
    </div>
 

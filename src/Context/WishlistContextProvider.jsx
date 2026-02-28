@@ -45,7 +45,7 @@ export default function WishlistContextProvider({children}) {
     }
   }
 
-async function removeWishlist(productId) {
+  async function removeWishlist(productId) {
   try {
     let res = await axios.delete(
       `https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`,
@@ -60,9 +60,20 @@ async function removeWishlist(productId) {
   }
 }
 
+function isInWishlist(productId) {
+  return products?.some((item) => item._id === productId)
+}
+
+async function toggleWishlist(productId) {
+  if (isInWishlist(productId)) {
+    return removeWishlist(productId)
+  }
+  return addToWishlist(productId)
+}
+
 
 return (
-    <WishlistContext.Provider value={{getWishlist ,addToWishlist , removeWishlist ,isLoading , totalPrice , products ,  numOfWishlist }}>
+    <WishlistContext.Provider value={{getWishlist ,addToWishlist , removeWishlist ,toggleWishlist, isInWishlist, isLoading , totalPrice , products ,  numOfWishlist }}>
       
       {children}
 
