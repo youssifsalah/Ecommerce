@@ -49,8 +49,12 @@ async function updateProduct(id,count) {
 
 <div className='mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3'>
   <div className='text-center sm:text-left'>
-    <h2 className='font-mono text-xl sm:text-2xl'>Total price : {totalPrice} EGP</h2>
-    <h2 className='font-mono text-xl sm:text-2xl'>Number Of Items : {numOfCart}</h2>
+    <h2 className='text-2xl sm:text-3xl font-extrabold font-serif tracking-wide text-gray-900'>
+      Total Price: <span className='text-green-700'>{totalPrice} EGP</span>
+    </h2>
+    <h2 className='text-lg sm:text-xl font-semibold font-serif tracking-wide text-gray-700 mt-1'>
+      Number Of Items: <span className='text-black font-bold'>{numOfCart}</span>
+    </h2>
   </div>
   <button onClick={()=>{deleteCart()}} type="button" className="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center w-full sm:w-auto">Clear Cart</button>
 </div>
