@@ -6,7 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import * as YUP from "yup" ;
 import logo from "../../assets/YS.png"
 
-import { authContext } from '../../Context/AuthContextProvider';export default function Login() {
+import { authContext } from '../../Context/AuthContextProvider';
+
+
+export default function Login() {
 let {setToken} = useContext(authContext)
   let navigate = useNavigate();
   const [ErrMessage, setErrMessage] = useState(null);
@@ -15,6 +18,7 @@ const [isLoading, setIsLoading] = useState(false);
   async function handleLogin(values) {
 
     console.log(values);
+    setIsLoading(true)
 
       axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values)
       .then((res)=>{
@@ -60,9 +64,9 @@ let validationSchema = YUP.object().shape({
         </div>
       ) : null}
 
-   <div className='bg-gray-100 w-120 mx-auto rounded-2xl'>
-    <img src={logo} alt='logo' className='w-20 mx-auto mb-2 pt-5'></img>
-         <form onSubmit={LoginForm.handleSubmit} className='w-6/7 px-15 mx-auto'>
+<div className='bg-gray-100 mx-auto rounded-2xl w-full max-w-md px-4 sm:px-6'>    
+  <img src={logo} alt='logo' className='w-20 mx-auto mb-2 pt-5'></img>
+         <form onSubmit={LoginForm.handleSubmit} className='w-full mx-auto'>
         <h2 className='my-5 font-serif text-[25px]'>Login</h2>
 
 

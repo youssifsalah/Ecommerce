@@ -7,7 +7,7 @@ export  function Products(props) {
 
 
 return<>
-<h1 className='mb-0'>Products </h1>
+<h1 className='text-3xl sm:text-4xl font-extrabold font-serif tracking-wide mb-2'>Products</h1>
 <p className='mb-10'>Discover Our New Products </p>
 <DisplayProducts/>
 </>

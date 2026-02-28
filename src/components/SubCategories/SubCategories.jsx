@@ -26,13 +26,13 @@ export default function SubCategories() {
   }, [id])
 
   return <> 
-    <div className="grid grid-cols-5 gap-3 cursor-pointer">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 cursor-pointer">
       {subcategories.map((subcat) => 
-        <div key={subcat._id} className=" p-5 rounded">
+        <div key={subcat._id} className="p-2 sm:p-4 rounded">
       
 
   <Link to={`/products/sub/${subcat._id}`}>
-  <div className='bg-green-400 p-5'>
+  <div className='bg-green-400 p-4 rounded-xl'>
   <img src={categoryImage} alt={subcat.name} className="w-full h-40 object-cover mb-2 rounded" />
           <h1 className="text-center">{subcat.name}</h1>
   </div>

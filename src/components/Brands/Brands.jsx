@@ -29,13 +29,13 @@ useEffect(() => {
   wrapperStyle={{}}
   wrapperClass="color-ring-wrapper"
   colors={['#e15b64']}
-  /></div>:  <div className='sm:grid grid-cols-1 gap-10 item-center mx-auto px-auto md:grid grid-cols-2 gap-10 item-center mx-auto px-auto lg:grid grid-cols-3 gap-10 item-center mx-auto px-auto'>
+  /></div>:  <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8'>
 {brands.map((brand)=>
-<div className='mx-auto'>
+<div className='mx-auto w-full' key={brand._id}>
 
 
- <div className='shadow-2xl '>
-  <img src={brand.image} alt='brand'></img>
+ <div className='shadow-2xl rounded-xl overflow-hidden'>
+  <img src={brand.image} alt='brand' className='w-full h-40 sm:h-48 object-cover'></img>
 
  </div>
 </div>

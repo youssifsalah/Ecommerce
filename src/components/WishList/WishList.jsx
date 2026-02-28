@@ -75,17 +75,17 @@ export default function WishList() {
  }
   return <>
       
-        <h1>Wishlist </h1>
+        <h1 className='text-3xl sm:text-4xl font-extrabold font-serif tracking-wide mb-4'>Wishlist</h1>
      <div className='text-center'>
    
-      <h1 className='text-4xl font-serif mb-10 '>Number Of Items : {numOfWishlist}</h1> 
+      <h1 className='text-2xl sm:text-4xl font-serif mb-8'>Number Of Items : {numOfWishlist}</h1> 
 </div>
 
 
-<div className="grid  sm:grid-cols-2 sm:mx-auto  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                   {products?.map((product) => (
-                    <div className='group overflow-hidden relative cursor-pointer shadow-2xl p-2 px-3 rounded-3xl' key={product._id}>
-                      <Link to={`/ProductDetails/${product._id}/${product.category}`}>
+                    <div className='group overflow-hidden relative cursor-pointer shadow-2xl p-2 px-3 rounded-3xl h-full flex flex-col' key={product._id}>
+                      <Link to={`/ProductDetails/${product._id}/${product.category}`} className='flex-1 flex flex-col'>
                         <img src={product.imageCover} alt={product.title}/>
                         
                         <h2 className='text-mono text-black font-bold'>{product.title.split(" ", 2).join(" ")}</h2>
@@ -107,17 +107,17 @@ export default function WishList() {
                           <span><i className='fas fa-star text-yellow-400'></i>{product.ratingsAverage}</span>
                         </div>
                         {product.priceAfterDiscount ? (
-                          <span className="mb-10 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-700 dark:text-white">
+                          <span className="inline-block self-start mb-10 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-red-700 dark:text-white">
                             Sale
                           </span>
                         ) : null}
                       </Link>
-        <div >         
+        <div className='mt-auto pt-3 flex items-center gap-2 flex-wrap'>         
         
           <button type="button"   onClick={()=>{addToCartProduct(product._id)}}
-         class="inline-flex items-center btn me-10 bg-black rounded-3xl text-white bg-brand hover:bg-gray-800 box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-        <svg class="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+         className="inline-flex items-center bg-black rounded-3xl text-white hover:bg-gray-800 border border-transparent text-sm px-4 py-2.5">
+        <svg className="w-4 h-4 me-1.5 -ms-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
         </svg>
         Add To Cart
         </button>
@@ -127,7 +127,7 @@ export default function WishList() {
                         className="cursor-pointer 
                         text-red-600
                         hover:text-black text-3xl"
-                      ><i class="fa-solid fa-heart"></i></button>
+                      ><i className="fa-solid fa-heart"></i></button>
         
                     
         </div>

@@ -1,20 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navbar } from '../Navbar/Navbar'
 import Footer from "../Footer/Footer"
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 
 export default function Layout() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual"
+    }
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
       <Navbar />
 
-      {/* Content */}
-      <div className="container flex-grow sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto my-5 mt-18">
-        <Outlet /> {/* Pages go here */}
+      <div className="w-full max-w-7xl mx-auto flex-grow px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-6">
+        <Outlet />
       </div>
 
-      {/* Footer (sticks to bottom if page is short) */}
       <Footer />
     </div>
   )

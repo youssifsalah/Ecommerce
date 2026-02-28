@@ -16,6 +16,7 @@ const [isLoading, setIsLoading] = useState(false);
   async function handleRegister(values) {
 
     console.log(values);
+    setIsLoading(true)
 
       axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
       .then((res)=>{
@@ -28,7 +29,7 @@ const [isLoading, setIsLoading] = useState(false);
   console.log(error.response.data.message);
   setErrMessage(error.response.data.message)
 }) .finally(()=>{
-  setLoading(false)
+  setIsLoading(false)
 })
 
 
@@ -66,8 +67,8 @@ let validationSchema = YUP.object().shape({
         </div>
       ) : null}
 
-      <form onSubmit={registerForm.handleSubmit} className='w-6/7 px-15 mx-auto'>
-        <h2 className='my-5 mt-25 text-[25px]'>Register Now</h2>
+      <form onSubmit={registerForm.handleSubmit} className='w-full max-w-2xl px-4 sm:px-6 mx-auto'>
+        <h2 className='my-5 mt-6 text-[25px]'>Register Now</h2>
 
 
         <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900">Name:</label>
